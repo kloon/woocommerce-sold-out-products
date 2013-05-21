@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Sold Out Products
  * Plugin URI: http://www.woothemes.com/woocommerce/
  * Description: Adds a sold out products widget and shortcode to showcase your sold out products
- * Version: 1.0
+ * Version: 1.0.1
  * Author: Gerhard Potgieter
  * Author URI: http://gerhardpotgieter.com
  * Requires at least: 3.5

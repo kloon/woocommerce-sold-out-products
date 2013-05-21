@@ -26,7 +26,8 @@ class WC_Sold_Out_Products {
 		add_action( 'widgets_init', array( $this, 'register_widget' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_stylesheet' ) );
 		add_shortcode( 'sold_out_products', array( $this, 'sold_out_products_shortcode' ) );
-		add_action( 'woocommerce_before_single_product_summary', array( $this, 'sold_out_products_flash' ), 9 );
+		add_action( 'woocommerce_before_single_product_summary', array( $this, 'single_sold_out_products_flash' ), 9 );
+		add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'loop_sold_out_products_flash' ), 9 );
 	}
 
 	/**
@@ -125,13 +126,29 @@ class WC_Sold_Out_Products {
 	 * @access public
 	 * @return void
 	 */
-	function sold_out_products_flash() {
+	function single_sold_out_products_flash() {
 		global $product;
 		if ( ! $product->is_in_stock() ) {
 			remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10 );
 		}
 		$plugin_path = trailingslashit( plugin_dir_path( $this->file ) );
 		woocommerce_get_template( 'single-product/sold-out-flash.php', '', '', $plugin_path . 'templates/' );
+	}
+
+	/**
+	 * add sold out text to the product image on shop page
+	 *
+	 * @since 1.0.1
+	 * @access public
+	 * @return void
+	 */
+	function loop_sold_out_products_flash() {
+		global $product;
+		if ( ! $product->is_in_stock() ) {
+			remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
+		}
+		$plugin_path = trailingslashit( plugin_dir_path( $this->file ) );
+		woocommerce_get_template( 'loop/sold-out-flash.php', '', '', $plugin_path . 'templates/' );
 	}
 }
 

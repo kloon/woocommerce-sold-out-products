@@ -28,6 +28,7 @@ class WC_Sold_Out_Products {
 		add_shortcode( 'sold_out_products', array( $this, 'sold_out_products_shortcode' ) );
 		add_action( 'woocommerce_before_single_product_summary', array( $this, 'single_sold_out_products_flash' ), 9 );
 		add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'loop_sold_out_products_flash' ), 9 );
+		add_filter( 'woocommerce_product_is_visible', array( $this, 'make_sold_out_products_visible' ), 10, 2 );
 	}
 
 	/**
@@ -63,7 +64,8 @@ class WC_Sold_Out_Products {
 	 * @return string
 	 */
 	function sold_out_products_shortcode( $atts ) {
-		global $woocommerce_loop, $woocommerce;
+		global $woocommerce_loop, $woocommerce, $sold_out_shortcode_used;
+		$sold_out_shortcode_used = true;
 
 		extract( shortcode_atts( array(
 			'per_page' 	=> '12',
@@ -149,6 +151,26 @@ class WC_Sold_Out_Products {
 		}
 		$plugin_path = trailingslashit( plugin_dir_path( $this->file ) );
 		woocommerce_get_template( 'loop/sold-out-flash.php', '', '', $plugin_path . 'templates/' );
+	}
+
+	/**
+	 * Make all sold out products visible when shortcode is used
+	 *
+	 * @since 1.0.2
+	 * @access public
+	 * @return bool
+	 */
+	function make_sold_out_products_visible( $visible, $product_id ) {
+		global $sold_out_shortcode_used;
+		if ( $sold_out_shortcode_used ) {
+			if ( $visible )
+				return $visible;
+
+			$product = get_product( $product_id );
+			if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' && ! $product->is_in_stock() )
+				return true;
+			else return $visible;
+		} else return $visible;
 	}
 }
 

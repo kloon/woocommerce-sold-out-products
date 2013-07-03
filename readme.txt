@@ -4,7 +4,7 @@ Donate link: http://gerhardpotgieter.com/donate
 Tags: woocommerce, products, sold out, widget, shortcode
 Requires at least: 3.5
 Tested up to: 3.5.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -52,11 +52,14 @@ Installing "WooCommerce Sold Out Products" can be done either by searching for "
 
 == Changelog ==
 
-= 1.0 - 2013-05-10 =
-* Initial release!
+= 1.0.2 - 2013-07-03 =
+* Show sold out products on shortcode page when WC has it set to hide
 
 = 1.0.1 - 2013-05-16 =
 * Sold Out flash on shop archive pages
+
+= 1.0 - 2013-05-10 =
+* Initial release!
 
 == Frequently Asked Questions ==
 

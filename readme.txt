@@ -52,6 +52,9 @@ Installing "WooCommerce Sold Out Products" can be done either by searching for "
 
 == Changelog ==
 
+= 1.0.3 - 2013-08-14 =
+* Fix missing sale badges after first sold out badge
+
 = 1.0.2 - 2013-07-03 =
 * Show sold out products on shortcode page when WC has it set to hide
 

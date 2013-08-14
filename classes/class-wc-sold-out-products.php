@@ -23,12 +23,18 @@ class WC_Sold_Out_Products {
 	public function __construct( $file ) {
 		$this->file = $file;
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain_files' ) );
+		add_action( 'plugins_loaded', array( $this, 'unload_woocommerce_actions' ) );
 		add_action( 'widgets_init', array( $this, 'register_widget' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_stylesheet' ) );
 		add_shortcode( 'sold_out_products', array( $this, 'sold_out_products_shortcode' ) );
 		add_action( 'woocommerce_before_single_product_summary', array( $this, 'single_sold_out_products_flash' ), 9 );
 		add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'loop_sold_out_products_flash' ), 9 );
 		add_filter( 'woocommerce_product_is_visible', array( $this, 'make_sold_out_products_visible' ), 10, 2 );
+		add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'show_hide_loop_sale_flash' ), 10 );
+	}
+
+	function unload_woocommerce_actions() {
+		remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
 	}
 
 	/**
@@ -146,9 +152,6 @@ class WC_Sold_Out_Products {
 	 */
 	function loop_sold_out_products_flash() {
 		global $product;
-		if ( ! $product->is_in_stock() ) {
-			remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
-		}
 		$plugin_path = trailingslashit( plugin_dir_path( $this->file ) );
 		woocommerce_get_template( 'loop/sold-out-flash.php', '', '', $plugin_path . 'templates/' );
 	}
@@ -171,6 +174,20 @@ class WC_Sold_Out_Products {
 				return true;
 			else return $visible;
 		} else return $visible;
+	}
+
+	/**
+	 * Only load sale flash when product not sold out
+	 *
+	 * @since 1.0.3
+	 * @access public
+	 * @return bool
+	 */
+	function show_hide_loop_sale_flash() {
+		global $product;
+		if ( $product->is_in_stock() ) {
+			woocommerce_get_template( 'loop/sale-flash.php' );
+		}
 	}
 }
 

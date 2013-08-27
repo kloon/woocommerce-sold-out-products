@@ -4,7 +4,7 @@ Donate link: http://gerhardpotgieter.com/donate
 Tags: woocommerce, products, sold out, widget, shortcode
 Requires at least: 3.5
 Tested up to: 3.5.2
-Stable tag: 1.0.2
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,9 @@ Installing "WooCommerce Sold Out Products" can be done either by searching for "
 1. Sold Out Flash on single product page
 
 == Changelog ==
+
+= 1.0.4 = 2013-08-27 =
+* Version bump to fix missing templates files
 
 = 1.0.3 - 2013-08-14 =
 * Fix missing sale badges after first sold out badge

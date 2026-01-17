@@ -2,17 +2,41 @@
 /**
  * Product Loop Sold Out Flash
  *
- * @author 		Gerhard Potgieter
- * @package 	WooCommerce/Templates
- * @version     1.0.1
+ * This template displays the "Sold Out!" badge on product loops/archives.
+ *
+ * This template can be overridden by copying it to yourtheme/woocommerce/loop/sold-out-flash.php.
+ *
+ * @package Kloon\WCSoldOutProducts\Templates
+ * @version 2.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
-global $post, $product;
-?>
-<?php if ( ! $product->is_in_stock() ) : ?>
+global $product;
 
-	<?php echo apply_filters( 'woocommerce_sold_out_flash', '<span class="soldout">'.__( 'Sold Out!', 'wc-sold-out-products' ).'</span>', $post, $product ); ?>
+if ( ! $product instanceof WC_Product ) {
+	return;
+}
 
-<?php endif; ?>
+if ( ! $product->is_in_stock() ) :
+	/**
+	 * Filter the sold out flash HTML.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string     $html    The sold out flash HTML.
+	 * @param WP_Post    $post    The product post object.
+	 * @param WC_Product $product The product object.
+	 */
+	$html = apply_filters(
+		'woocommerce_sold_out_flash',
+		sprintf(
+			'<span class="soldout">%s</span>',
+			esc_html__( 'Sold Out!', 'wc-sold-out-products' )
+		),
+		get_post(),
+		$product
+	);
+
+	echo wp_kses_post( $html );
+endif;

@@ -1,0 +1,59 @@
+/**
+ * Sold Out Products Block - Editor Styles
+ *
+ * @package Kloon\WCSoldOutProducts
+ */
+
+.wp-block-wc-sold-out-products-sold-out-products {
+	// Editor wrapper
+	&.wc-sold-out-products-block {
+		min-height: 200px;
+		padding: 1em;
+		border: 1px dashed #ccc;
+		border-radius: 4px;
+
+		// Loading state
+		.components-placeholder {
+			min-height: 150px;
+			background: #f9f9f9;
+			border-radius: 4px;
+
+			.components-spinner {
+				margin: 0 auto;
+			}
+		}
+	}
+
+	// Server side render wrapper
+	.block-editor-server-side-render {
+		pointer-events: none;
+
+		// Ensure products are visible in editor
+		.woocommerce {
+			opacity: 0.9;
+		}
+	}
+
+	// Preview message
+	&::before {
+		display: block;
+		margin-bottom: 1em;
+		padding: 0.5em 1em;
+		font-size: 12px;
+		color: #666;
+		background: #f0f0f0;
+		border-radius: 3px;
+		content: "Sold Out Products Block Preview";
+	}
+}
+
+// Inspector controls styling
+.wc-sold-out-products-inspector {
+	.components-panel__body {
+		padding-bottom: 16px;
+	}
+
+	.components-range-control {
+		margin-bottom: 16px;
+	}
+}

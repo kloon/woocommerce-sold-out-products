@@ -1,0 +1,90 @@
+{
+	"name": "woocommerce-sold-out-products",
+	"version": "2.0.0",
+	"description": "Adds a sold out products widget, shortcode, and Gutenberg block to showcase sold out products in WooCommerce",
+	"author": "Gerhard Potgieter",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"woocommerce",
+		"sold out",
+		"out of stock",
+		"products",
+		"widget",
+		"block",
+		"gutenberg"
+	],
+	"homepage": "https://github.com/kloon/woocommerce-sold-out-products",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/kloon/woocommerce-sold-out-products.git"
+	},
+	"bugs": {
+		"url": "https://github.com/kloon/woocommerce-sold-out-products/issues"
+	},
+	"engines": {
+		"node": ">=22.0.0",
+		"pnpm": ">=9.0.0"
+	},
+	"packageManager": "pnpm@9.15.4",
+	"scripts": {
+		"build": "wp-scripts build",
+		"build:prod": "wp-scripts build --mode=production",
+		"start": "wp-scripts start",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"lint:md:docs": "wp-scripts lint-md-docs",
+		"lint:pkg-json": "wp-scripts lint-pkg-json",
+		"lint:php": "composer lint",
+		"lint:php:fix": "composer lint:fix",
+		"lint": "pnpm lint:js && pnpm lint:css && pnpm lint:php",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"test:unit:js": "wp-scripts test-unit-js",
+		"test:unit:php": "composer test",
+		"test:unit:php:coverage": "composer test:coverage",
+		"test": "pnpm test:unit:js && pnpm test:unit:php",
+		"env:start": "wp-env start",
+		"env:stop": "wp-env stop",
+		"env:destroy": "wp-env destroy",
+		"env:clean": "wp-env clean",
+		"env:logs": "wp-env logs",
+		"env:cli": "wp-env run cli",
+		"env:shell": "wp-env run cli bash",
+		"env:install-wc": "wp-env run cli -- wp plugin install woocommerce --activate",
+		"env:setup": "pnpm env:start && pnpm env:install-wc && pnpm env:setup-wc",
+		"env:setup-wc": "wp-env run cli -- wp option update woocommerce_onboarding_profile '{\"completed\":true}' --format=json && wp-env run cli -- wp wc tool run install_pages --user=admin",
+		"svn:checkout": "svn checkout https://plugins.svn.wordpress.org/woocommerce-sold-out-products svn-repo --depth=empty && cd svn-repo && svn update trunk --set-depth=infinity && svn update tags --set-depth=immediates",
+		"svn:sync": "rsync -av --delete --exclude='.git' --exclude='node_modules' --exclude='vendor' --exclude='tests' --exclude='.wp-env.json' --exclude='phpunit.xml' --exclude='phpcs.xml' --exclude='composer.json' --exclude='composer.lock' --exclude='package.json' --exclude='pnpm-lock.yaml' --exclude='.gitignore' --exclude='.editorconfig' --exclude='svn-repo' --exclude='src' --exclude='*.md' --exclude='.github' ./ svn-repo/trunk/",
+		"svn:tag": "cd svn-repo && svn cp trunk tags/$npm_package_version",
+		"svn:commit": "cd svn-repo && svn add --force . && svn commit -m \"Release version $npm_package_version\"",
+		"release": "pnpm build:prod && pnpm svn:checkout && pnpm svn:sync && pnpm svn:tag && pnpm svn:commit"
+	},
+	"devDependencies": {
+		"@woocommerce/dependency-extraction-webpack-plugin": "^3.0.1",
+		"@woocommerce/eslint-plugin": "^2.3.0",
+		"@wordpress/block-editor": "^14.9.0",
+		"@wordpress/blocks": "^14.3.0",
+		"@wordpress/components": "^29.2.0",
+		"@wordpress/data": "^10.9.0",
+		"@wordpress/element": "^6.9.0",
+		"@wordpress/env": "^10.13.0",
+		"@wordpress/i18n": "^5.9.0",
+		"@wordpress/icons": "^10.9.0",
+		"@wordpress/scripts": "^30.8.1",
+		"@wordpress/server-side-render": "^5.9.0",
+		"copy-webpack-plugin": "^12.0.2"
+	},
+	"files": [
+		"assets/",
+		"build/",
+		"classes/",
+		"languages/",
+		"templates/",
+		"index.php",
+		"readme.txt",
+		"woocommerce-sold-out-products.php"
+	]
+}

@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Build artifacts
+build/
+*.zip
+
+# Environment
+.wp-env/
+.env
+.env.local
+
+# IDE and editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.project
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+.phpunit.result.cache
+.phpunit.cache/
+
+# SVN release directory
+svn-repo/
+
+# Misc
+*.bak
+*.swp
+*~

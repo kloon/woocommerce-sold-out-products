@@ -1,0 +1,51 @@
+{
+	"name": "kloon/woocommerce-sold-out-products",
+	"description": "Adds a sold out products widget, shortcode, and Gutenberg block to showcase sold out products in WooCommerce",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Gerhard Potgieter",
+			"email": "gerhard@developer.dev"
+		}
+	],
+	"minimum-stability": "stable",
+	"prefer-stable": true,
+	"require": {
+		"php": ">=7.4"
+	},
+	"require-dev": {
+		"automattic/woocommerce-sniffs": "^1.0",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"phpcompatibility/phpcompatibility-wp": "^2.1",
+		"phpunit/phpunit": "^9.6",
+		"wp-phpunit/wp-phpunit": "^6.7",
+		"yoast/phpunit-polyfills": "^3.0",
+		"woocommerce/woocommerce": "^9.5"
+	},
+	"autoload": {
+		"classmap": [
+			"classes/"
+		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Kloon\\WCSoldOutProducts\\Tests\\": "tests/php/"
+		}
+	},
+	"scripts": {
+		"lint": "phpcs",
+		"lint:fix": "phpcbf",
+		"test": "phpunit --configuration phpunit.xml",
+		"test:coverage": "phpunit --configuration phpunit.xml --coverage-html coverage"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		},
+		"platform": {
+			"php": "7.4"
+		},
+		"sort-packages": true
+	}
+}

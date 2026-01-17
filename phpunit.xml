@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+	bootstrap="tests/php/bootstrap.php"
+	backupGlobals="false"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	beStrictAboutTestsThatDoNotTestAnything="true"
+	>
+	<php>
+		<env name="WP_PHPUNIT__TESTS_CONFIG" value="tests/php/wp-tests-config.php"/>
+	</php>
+	<testsuites>
+		<testsuite name="WC Sold Out Products Test Suite">
+			<directory suffix="Test.php">./tests/php/</directory>
+		</testsuite>
+	</testsuites>
+	<coverage>
+		<include>
+			<directory suffix=".php">./classes</directory>
+			<file>./woocommerce-sold-out-products.php</file>
+		</include>
+		<exclude>
+			<directory>./vendor</directory>
+			<directory>./node_modules</directory>
+			<directory>./tests</directory>
+		</exclude>
+	</coverage>
+</phpunit>

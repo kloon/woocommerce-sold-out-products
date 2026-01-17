@@ -1,0 +1,45 @@
+{
+	"core": "WordPress/WordPress#6.7",
+	"phpVersion": "8.2",
+	"plugins": [
+		".",
+		"https://downloads.wordpress.org/plugin/woocommerce.latest-stable.zip"
+	],
+	"themes": [
+		"https://downloads.wordpress.org/theme/storefront.latest-stable.zip"
+	],
+	"config": {
+		"WP_DEBUG": true,
+		"WP_DEBUG_LOG": true,
+		"WP_DEBUG_DISPLAY": false,
+		"SCRIPT_DEBUG": true,
+		"WP_ENVIRONMENT_TYPE": "local",
+		"WC_TAX_ROUNDING_MODE": "auto"
+	},
+	"mappings": {
+		"wp-content/plugins/woocommerce-sold-out-products": "."
+	},
+	"env": {
+		"tests": {
+			"core": "WordPress/WordPress#6.7",
+			"phpVersion": "8.2",
+			"plugins": [
+				".",
+				"https://downloads.wordpress.org/plugin/woocommerce.latest-stable.zip"
+			],
+			"themes": [
+				"https://downloads.wordpress.org/theme/storefront.latest-stable.zip"
+			],
+			"config": {
+				"WP_DEBUG": true,
+				"WP_DEBUG_LOG": true,
+				"WP_DEBUG_DISPLAY": false,
+				"SCRIPT_DEBUG": true,
+				"WP_ENVIRONMENT_TYPE": "local"
+			},
+			"mappings": {
+				"wp-content/plugins/woocommerce-sold-out-products": "."
+			}
+		}
+	}
+}

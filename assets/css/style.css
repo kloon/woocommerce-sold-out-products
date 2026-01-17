@@ -1,33 +1,201 @@
-.woocommerce span.soldout, .woocommerce-page span.soldout {
+/**
+ * WooCommerce Sold Out Products Styles
+ *
+ * @package Kloon\WCSoldOutProducts
+ * @version 2.0.0
+ */
+
+/* ==========================================================================
+   Sold Out Badge - Base Styles
+   ========================================================================== */
+
+.woocommerce span.soldout,
+.woocommerce-page span.soldout {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	min-height: 52px;
 	min-width: 52px;
-	padding: 4px;
-	font-size: 10px;
-	font-weight: bold;
+	padding: 8px 12px;
+	font-size: 11px;
+	font-weight: 700;
 	position: absolute;
 	text-align: center;
-	line-height: 52px;
-	top: 6px;
-	left: 6px;
+	line-height: 1.2;
+	top: 0.5em;
+	left: 0.5em;
 	margin: 0;
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	border-radius: 40px;
-	background: #C11B17;
-	background: -webkit-gradient(linear,left top,left bottom,from(#C11B17),to(#7E2217));
-	background: -webkit-linear-gradient(#C11B17,#7E2217);
-	background: -moz-linear-gradient(center top,#C11B17 0,#7E2217 100%);
-	background: -moz-gradient(center top,#C11B17 0,#7E2217 100%);
-	text-shadow: 0 -1px 0 #7E2217;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #c11b17 0%, #7e2217 100%);
 	color: #fff;
-	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.3),inset 0 -1px 0 rgba(0,0,0,0.2),0 1px 2px rgba(0,0,0,0.2);
-	-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.3),inset 0 -1px 0 rgba(0,0,0,0.2),0 1px 2px rgba(0,0,0,0.2);
-	box-shadow: inset 0 1px 0 rgba(255,255,255,0.3),inset 0 -1px 0 rgba(0,0,0,0.2),0 1px 2px rgba(0,0,0,0.2);
+	text-transform: uppercase;
+	letter-spacing: 0.025em;
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.25),
+		inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+		0 2px 4px rgba(0, 0, 0, 0.2);
+	z-index: 9;
 }
 
-.woocommerce ul.products li.product .soldout, .woocommerce-page ul.products li.product .soldout {
+/* ==========================================================================
+   Sold Out Badge - Shop Loop / Archive
+   ========================================================================== */
+
+.woocommerce ul.products li.product .soldout,
+.woocommerce-page ul.products li.product .soldout {
 	top: 0;
 	right: 0;
 	left: auto;
-	margin: -6px -6px 0 0;
+	margin: -0.5em -0.5em 0 0;
+}
+
+/* ==========================================================================
+   Widget Styles
+   ========================================================================== */
+
+.widget_sold_out_products {
+	/* Widget container */
+}
+
+.widget_sold_out_products .product_list_widget {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.widget_sold_out_products .product_list_widget li {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: 0.75em;
+	padding: 0.75em 0;
+	margin: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.widget_sold_out_products .product_list_widget li:last-child {
+	border-bottom: none;
+}
+
+.widget_sold_out_products .product_list_widget li a {
+	display: flex;
+	align-items: center;
+	gap: 0.75em;
+	text-decoration: none;
+	color: inherit;
+	flex: 1;
+}
+
+.widget_sold_out_products .product_list_widget li a:hover {
+	opacity: 0.8;
+}
+
+.widget_sold_out_products .product_list_widget li img {
+	width: 60px;
+	height: auto;
+	border-radius: 4px;
+	flex-shrink: 0;
+}
+
+.widget_sold_out_products .product_list_widget li .product-title {
+	flex: 1;
+	font-weight: 500;
+}
+
+.widget_sold_out_products .product_list_widget li .price {
+	display: block;
+	width: 100%;
+	padding-left: calc(60px + 0.75em);
+	font-size: 0.875em;
+	color: #666;
+}
+
+.widget_sold_out_products .product_list_widget li .price del {
+	opacity: 0.6;
+	margin-right: 0.25em;
+}
+
+.widget_sold_out_products .product_list_widget li .price ins {
+	text-decoration: none;
+	font-weight: 600;
+}
+
+/* ==========================================================================
+   Shortcode Styles
+   ========================================================================== */
+
+.wc-sold-out-products-shortcode {
+	margin-bottom: 2em;
+}
+
+.wc-sold-out-products-shortcode .products {
+	display: grid;
+	gap: 1.5em;
+	grid-template-columns: repeat(var(--wc-sold-out-columns, 4), 1fr);
+}
+
+/* Responsive grid */
+@media (max-width: 991px) {
+	.wc-sold-out-products-shortcode .products {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (max-width: 767px) {
+	.wc-sold-out-products-shortcode .products {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 479px) {
+	.wc-sold-out-products-shortcode .products {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ==========================================================================
+   Block Styles
+   ========================================================================== */
+
+.wp-block-wc-sold-out-products-sold-out-products {
+	margin-bottom: 2em;
+}
+
+.wp-block-wc-sold-out-products-sold-out-products .woocommerce {
+	margin: 0;
+}
+
+/* No products message */
+.wc-sold-out-products-no-products {
+	padding: 1em 1.5em;
+	margin: 0;
+	background-color: #f7f6f7;
+	border-left: 4px solid #8fae1b;
+	border-radius: 0 4px 4px 0;
+}
+
+/* ==========================================================================
+   Dark Mode Support
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+	.widget_sold_out_products .product_list_widget li {
+		border-bottom-color: rgba(255, 255, 255, 0.1);
+	}
+
+	.widget_sold_out_products .product_list_widget li .price {
+		color: #aaa;
+	}
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+	.woocommerce span.soldout,
+	.woocommerce-page span.soldout {
+		background: #666 !important;
+		box-shadow: none !important;
+	}
 }
